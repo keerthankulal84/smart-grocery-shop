@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout - FreshCart</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header id="site-header"></header>
+
+<div class="container">
+  <h2 style="margin-top:32px;">Checkout</h2>
+  <div class="cart-layout">
+    <div>
+      <div class="summary-card" style="position:static;">
+        <h3 style="margin-top:0;">Shipping Address</h3>
+        <div id="form-error" class="form-error"></div>
+        <form id="checkout-form">
+          <div class="form-group">
+            <label for="line1">Address</label>
+            <input type="text" id="line1" required placeholder="House no., street, area">
+          </div>
+          <div class="form-group">
+            <label for="city">City</label>
+            <input type="text" id="city" required>
+          </div>
+          <div class="form-group">
+            <label for="state">State</label>
+            <input type="text" id="state" required>
+          </div>
+          <div class="form-group">
+            <label for="pincode">Pincode</label>
+            <input type="text" id="pincode" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone number</label>
+            <input type="tel" id="phone" required>
+          </div>
+          <button type="submit" id="place-order-btn" class="btn btn-accent btn-block">Place Order & Pay</button>
+        </form>
+      </div>
+    </div>
+    <div class="summary-card">
+      <h3 style="margin-top:0;">Order Summary</h3>
+      <div id="checkout-summary">Loading...</div>
+    </div>
+  </div>
+</div>
+
+<!-- Razorpay checkout script (test mode compatible) -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="js/api.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/checkout.js"></script>
+<script>
+  renderHeader('cart');
+  if (requireLogin()) loadCheckoutSummary();
+</script>
+</body>
+</html>

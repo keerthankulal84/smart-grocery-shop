@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin - FreshCart</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header id="site-header"></header>
+
+<div class="container">
+  <h2 style="margin-top:32px;">Admin Dashboard</h2>
+
+  <div class="admin-tabs">
+    <div class="admin-tab active" data-tab="products">Products</div>
+    <div class="admin-tab" data-tab="orders">Orders</div>
+  </div>
+
+  <div id="tab-products">
+    <button id="add-product-btn" class="btn btn-primary" style="margin-bottom:16px;">+ Add Product</button>
+    <table class="admin-table">
+      <thead>
+        <tr><th>Image</th><th>Name</th><th>Category</th><th>Price</th><th>Stock</th><th>Actions</th></tr>
+      </thead>
+      <tbody id="products-tbody"><tr><td colspan="6">Loading...</td></tr></tbody>
+    </table>
+  </div>
+
+  <div id="tab-orders" style="display:none;">
+    <table class="admin-table">
+      <thead>
+        <tr><th>Order ID</th><th>Customer</th><th>Total</th><th>Payment</th><th>Status</th><th>Update</th></tr>
+      </thead>
+      <tbody id="orders-tbody"><tr><td colspan="6">Loading...</td></tr></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Add/Edit product modal -->
+<div id="product-modal" class="modal-overlay">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3 id="modal-title" style="margin:0;">Add Product</h3>
+      <button class="modal-close" id="modal-close-btn">&times;</button>
+    </div>
+    <form id="product-form">
+      <input type="hidden" id="product-id">
+      <div class="form-group">
+        <label for="p-name">Name</label>
+        <input type="text" id="p-name" required>
+      </div>
+      <div class="form-group">
+        <label for="p-category">Category</label>
+        <input type="text" id="p-category" required placeholder="e.g. Fruits, Dairy, Snacks">
+      </div>
+      <div class="form-group">
+        <label for="p-price">Price (₹)</label>
+        <input type="number" id="p-price" required min="0" step="0.01">
+      </div>
+      <div class="form-group">
+        <label for="p-unit">Unit</label>
+        <input type="text" id="p-unit" placeholder="e.g. 1 kg, 1 dozen, 500 ml">
+      </div>
+      <div class="form-group">
+        <label for="p-stock">Stock quantity</label>
+        <input type="number" id="p-stock" required min="0">
+      </div>
+      <div class="form-group">
+        <label for="p-image">Image URL</label>
+        <input type="text" id="p-image" placeholder="https://...">
+      </div>
+      <div class="form-group">
+        <label for="p-description">Description</label>
+        <textarea id="p-description" rows="2"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Save Product</button>
+    </form>
+  </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/admin.js"></script>
+<script>
+  renderHeader('admin');
+  if (requireAdmin()) {
+    loadAdminProducts();
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Cart - FreshCart</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header id="site-header"></header>
+
+<div class="container">
+  <h2 style="margin-top:32px;">Your Cart</h2>
+  <div id="cart-layout" class="cart-layout">
+    <p>Loading cart...</p>
+  </div>
+</div>
+
+<footer>FreshCart Smart Grocery Shop &copy; 2026</footer>
+
+<script src="js/api.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/cart.js"></script>
+<script>
+  renderHeader('cart');
+  if (requireLogin()) loadCart();
+</script>
+</body>
+</html>

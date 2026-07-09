@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FreshCart - Smart Grocery Shop</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header id="site-header"></header>
+
+<section class="hero">
+  <div class="container">
+    <h1>Groceries delivered fresh, to your door.</h1>
+    <p>Fruits, vegetables, dairy and daily essentials — order in minutes.</p>
+    <div class="search-bar">
+      <input type="text" id="search-input" placeholder="Search for bananas, milk, rice...">
+      <button class="btn btn-primary" onclick="loadProducts()">Search</button>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <div id="category-chips" class="category-chips"></div>
+  <div id="product-grid" class="product-grid">
+    <p>Loading products...</p>
+  </div>
+</div>
+
+<footer>FreshCart Smart Grocery Shop &copy; 2026</footer>
+
+<script src="js/api.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/products.js"></script>
+<script>
+  renderHeader('home');
+  loadCategories();
+  loadProducts();
+</script>
+</body>
+</html>

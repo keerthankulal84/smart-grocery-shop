@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Orders - FreshCart</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header id="site-header"></header>
+
+<div class="container">
+  <h2 style="margin-top:32px;">My Orders</h2>
+  <div id="orders-list">
+    <p>Loading orders...</p>
+  </div>
+</div>
+
+<footer>FreshCart Smart Grocery Shop &copy; 2026</footer>
+
+<script src="js/api.js"></script>
+<script src="js/nav.js"></script>
+<script>
+  renderHeader('orders');
+  if (requireLogin()) loadOrders();
+
+  async function loadOrders() {
+    const list = document.getElementById('orders-list');
+    try {
+      const { orders } = await apiRequest('/orders');
+      if (orders.length === 0) {
+        list.innerHTML = `<div class="empty-state"><div class="icon">📦</div><p>No orders yet.</p><a href="index.html" class="btn btn-primary" style="margin-top:12px;">Start shopping</a></div>`;
+        return;
+      }
+      list.innerHTML = orders.map(renderOrderCard).join('');
+    } catch (err) {
+      list.innerHTML = `<p>Could not load orders: ${err.message}</p>`;
+    }
+  }
+
+  function renderOrderCard(order) {
+    const date = new Date(order.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+    const itemsHtml = order.items.map((i) => `
+      <div class="order-item-row"><span>${i.name} &times; ${i.quantity}</span><span>${formatPrice(i.price * i.quantity)}</span></div>
+    `).join('');
+
+    return `
+      <div class="order-card">
+        <div class="order-header">
+          <div>
+            <div class="order-id">Order #${order._id.slice(-6).toUpperCase()}</div>
+            <div class="order-date">${date}</div>
+          </div>
+          <div>
+            <span class="badge badge-${order.paymentStatus}">${order.paymentStatus}</span>
+            <span class="badge badge-${order.orderStatus}">${order.orderStatus}</span>
+          </div>
+        </div>
+        ${itemsHtml}
+        <div class="summary-row total" style="margin-top:10px;"><span>Total</span><span>${formatPrice(order.totalAmount)}</span></div>
+      </div>
+    `;
+  }
+</script>
+</body>
+</html>
