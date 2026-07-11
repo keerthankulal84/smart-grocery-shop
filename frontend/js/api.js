@@ -1,6 +1,6 @@
 // ===== Central API configuration =====
 // Change this to your deployed backend URL when you deploy (e.g. Render URL).
-const API_BASE_URL = 'http://192.168.0.103:5000/api';
+const API_BASE_URL = 'https://smart-grocery-shop-ts37.onrender.com/api';
 
 function getToken() {
   return localStorage.getItem('token');
